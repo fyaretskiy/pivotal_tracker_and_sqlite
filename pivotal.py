@@ -133,7 +133,7 @@ def update_table_2(database):
 			owner_ids = str(i["owner_ids"]) 
 		except KeyError:
 			owner_ids = NULL
-		owner_ids = owner_ids[1:-1]
+		owner_ids = owner_ids[1:-1] #removing the []
 		the_tuple = (story_id, requested_by_id, owner_ids)
 		try:
 			conn.execute("""insert into TABLE_2 values (?,?,?)""", (the_tuple))
