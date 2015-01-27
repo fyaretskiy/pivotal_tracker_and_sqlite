@@ -1,16 +1,9 @@
-#first figure out the connection
-#check if table exists
-#have commands to create and update utilizing the tutorial 
-#from new coder
-#need to use kargs to show data
-
-
 import api_key
 import sqlite3
 import requests
 
 
-api_token = api_key.api_token
+api_token = api_key.api_token #token and project id exist in seperate file
 project_id = api_key.project_id
 url = "https://www.pivotaltracker.com/services/v5/projects/{0}/stories".format(project_id)
 
@@ -140,7 +133,7 @@ def update_table_2(database):
 			owner_ids = str(i["owner_ids"]) 
 		except KeyError:
 			owner_ids = NULL
-		
+		owner_ids = owner_ids[1:-1]
 		the_tuple = (story_id, requested_by_id, owner_ids)
 		try:
 			conn.execute("""insert into TABLE_2 values (?,?,?)""", (the_tuple))
@@ -154,11 +147,10 @@ def update_table_2(database):
 
 if __name__ == "__main__":
 	create_TABLES("database.db")
-	# retrieve_all_tables("database.db")
+	# retrieve_all_tables("database.db") #extra code
 	update_table_1("database.db")
 	update_table_2("database.db")
-	# view_table_generic("database.db", "TABLE_1")
-	# view_table_generic("database.db", "TABLE_2")
+	# view_table_generic("database.db", "TABLE_1") #extra code - no headers
 	view_table_1("database.db")
 	view_table_2("database.db")
 
